@@ -1,9 +1,9 @@
 # Course Prerequisite Checker 
 
-This program is a tool for modeling course prerequisite relationships using directed acyclic graphs.
+This is a tool for modeling course prerequisite relationships using directed acyclic graphs.
 It allows users to build a graph of courses and their prerequisites, modify the graph by adding or removing courses and edges, and run various analyses such as checking prerequisite relationships and generating valid course paths.
 
-An example is provided based on the computer science curriculum at Smith College to demonstrate the program. 
+An example graph based on the computer science curriculum at Smith College is provided to demonstrate the program. 
 
 ### User Manual:  
 
