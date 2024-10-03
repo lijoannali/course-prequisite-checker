@@ -1,0 +1,111 @@
+Joanna Li 
+CSC 210
+Documentation for Course-Prerequisite Tools
+Implementation Details
+
+Details on Application of External Sources
+* A lot of guidance from Alexandra in office hours about the application of topological sorting and depth-first search, and the idea to implement the graph using in-edges– which is more useful for representing the course-prerequisite relationship. 
+* I read this to learn the theory behind graph representations, and the reasoning for using an adjacency list over an adjacency matrix for sparse graphs https://www.softwaretestinghelp.com/java-graph-tutorial/
+* I did not use code from this site, but I was inspired to use a HashMap to store the names of classes with Course objects as the keys, which made the program more user friendly. Users could modify the graph and run analyses using course names rather than arbitrary ID values, which change if vertices are ever removed or re-added, making them easy to confuse. http://www.cs.williams.edu/~bailey/JavaStructures2/bailey/structure/GraphList.java 
+* I lightly modified the code here to catch invalid inputs given to the Drivers through the scanner when it was expecting an integer but got a String. https://stackoverflow.com/questions/1486077/good-way-to-encapsulate-integer-parseint
+* I converted this code from python to java and changed the data structures used to suit my purposes. I also changed it for some methods to traverse the graph only up until it reached a destination node, and didn’t track duplicates on the course paths created by the DFS-based topological sorting. https://guides.codepath.com/compsci/Topological-Sort 
+* One of the example codes used to check if there is a path between two vertices was the inspiration for the IsRequired method. I used the logic of the method on this page and added more error checks and a way to track the path without including duplications to adapt the logic for my program. https://course.ccs.neu.edu/cs2510su18/lecture30.html
+* Used provided code from here to read in files and write to files 
+https://www.youtube.com/watch?v=XC6Oj-Pn_mc
+https://www.youtube.com/watch?v=k3K9KHPYZFc
+
+Details on The Selection of Data Structures 
+Use of HashMap
+A HashMap was used for nameToCourse, which has the String names of each course as its keys, which are then mapped to values corresponding to the Course Object represented by those names. It exists to map course names entered by users to their corresponding Course objects, which contain information like the course ID and list of the Course’s prerequisites. 
+A HashMap is able to store the associations between name and Courses as key and value pairs, and I  did not need to store the pairs  in any order, so I did not pick an ordered data structure. A Hashmap can store these associations and allow (on average) O(1) addition of String-Course pairs and O(1) lookups for keys when there aren’t any “hash clashes.” For those reasons, I decided it was a reasonable data structure to use. 
+
+Lists - I used some type of List when I needed ordered and dynamic data structures: 
+
+Use of ArrayList
+“Adjacency List” - 
+The “adjacency list” of the CourseGraph class consisted of an ArrayList of Courses, whose IDs corresponded to the index at which they were stored in the adjacency list. It is not the exact equivalent of a classic adjacency list used for graph representations. The actual content and in-edges of the graph were stored as an attribute of each individual course as adjacentVertices, while the ArrayList called adjacency list served as a list of references to Course objects which contained the lists of in-edges. I picked an ArrayList because the list of Courses was accessed very often during the running of the program, in almost all the methods written, so I opted for ArrayList for its O(1) lookup. In comparison, adding and removing from the Course list was performed less often; it was a reasonable tradeoff to give up efficiency in those areas and not use LinkedList, which has O(n) time lookups.  
+
+Lists of adjacent vertices - 
+These are lists of the adjacent vertices or courses which are associated with each Course. Most methods involving the adjacent vertices involve iterating over them with a regular for-loop, to print out all the elements or search through them. ArrayLists will use up less memory than a LinkedList which always stores references to the previous and next elements. I have also found some discussion of ArrayLists performing the same or better than LinkedLists for iteration by regular for loops, so I picked ArrayLists for the task. Add and remove was also not the priority for these lists, and this also justified the choice to pick ArrayList over LinkedList 
+
+
+
+Use of LinkedList
+Lists Built by Course Path - 
+These lists of course paths or progressions only needed to be added to at the ends and then printed, and were not stored or accessed by index after they were displayed for the user. Because adding to the ends of a LinkedList is always an O(1) operation, I picked LinkedList for this task. 
+
+
+What I Figured Out
+1. What a directed graph is, and how to represent it using an adjacency list 
+
+
+2. Why it is a good practice to declare class variables which are a specific data structure that inherits the List interface as a List, but initialize them as an ArrayList or LinkedList; it makes it easy to change the data structure later.
+
+
+3. How to catch invalid inputs and exceptions in Scanner and file reading/writing with try catch blocks
+
+
+4. Difference between BFS and DFS, and why DFS is more useful for my application because the IsRequired and topological sort functions both involved moving “deeper” down the in-edges of adjacency lists to access prerequisites, then the prerequisites of prerequisites, and so on. 
+
+
+5. How to implement and modify depth first search to check course requirements and make a topological sort. In my case, I modified the algorithms for DFS and topological sort (DFS based, not Kahn’s algorithm) so that the program could traverse across nodes or courses until a destination node is reached, and output a list of the path it took. 
+
+6. How to design a compact way to write a directed graph to a file so that it can be easily parsed by a read function to recreate an instance of the graph. This would allow users involved with the academic department to build a Course Graph in CourseGraphBuilder and write it to a text file which can be distributed to students, who can read that file into CourseGraphAnalyzer to run analysis methods. 
+
+
+If I Had More time
+I would have implemented a way to keep track of classes a student has already taken, so that students can check what courses they are currently ineligible or eligible for 
+
+
+It would also be interesting to design and implement a GUI for such an application, but I don’t know if it’s something I want to code in Java graphics. I might want to pick up another language or a few for that. 
+
+
+What was Left Out From the Proposal
+I did not implement the ability for students to mark classes as “completed” and run analyses such as listing out all the classes they were currently qualified for based on the courses they have completed. 
+
+
+Version History 
+1a_1b - Basic classes were written to represent the directed graph (CourseGraph) and the constructor, toString, and accessor/manipulator functions for that class and the vertex class (Course) were implemented and tested. 
+
+
+2a - Add vertex (course) and add edge functions were implemented and tested 
+
+
+2a1 - A modified version of DFS was used to implement the IsPrerequisite function (see User Manual)
+
+
+2b - Interactive Driver for creating a course graph and adding courses and edges was made 
+
+
+2b_ExtendedGeneric - Added a generic Vertex class that Course extends. 
+
+
+3a - Added, tested, debugged methods to delete vertex and edge
+
+
+3b- Extra debugging of vertex deletion 
+
+
+3c_CSCcourses - Added sample CSC major courses and course relationships into the Analysis class, which was also created and tested at this stage 
+
+
+3d_AddedIsPrereq - Reorganized code, moved all analysis methods like IsPrereq to the CourseGraphAnalysis class 
+
+
+3d_DFS_isRequired - Implemented DFS- based method to check if course is required 
+
+
+4a-TopoSort- Implemented DFS- based topological sort to generate course paths 
+
+
+6a_DriverForCourseAnalysis - Added IsPrereq, IsRequired, to CourseGraphAnalyzer, the driver at this stage which allows for user interaction with CourseAnalysis 
+
+
+6b_DriverWithCoursePath - Added topological sorting methods to CourseGraphAnalyzer 
+
+
+7a_BetterVariableNames- Rehaul of variable names to remove inconsistencies and confusion 
+
+
+8a_ReadandWrite - Implemented FileTools class that has methods to write a string to a .txt file, read a .txt file and return a string with its contents, and convert a .txt file to 
+9 - Cleanup of code, variable names, formatting and organization
