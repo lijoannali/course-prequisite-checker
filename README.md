@@ -25,26 +25,15 @@ An example graph based on the computer science curriculum at Smith College is pr
 
 ### Running `CourseGraphBuilder`:  
 
-- **99**  
-  Ends or quits the program. Quit will also occur if the program is run 90,000 times (a safeguard against infinite loops caused by bugs).  
-
-- **0**  
-  Lists all courses with their prerequisites, all with ID numbers. Some courses and relationships are added beforehand but can be commented out to add courses and edges from scratch.
-
-- **1**  
-  Add a course: Enter a course name to add it to the list. An ID will be generated for it.  
-
-- **2**  
-  Add an edge from a prerequisite to a course. Enter the course name, then the prerequisite. If both exist and there’s no parallel or self-edge, a new edge is added.
-
-- **3**  
-  Remove a course: Enter the course name to remove the course and its associated edges from the graph.
-
-- **4**  
-  Remove an edge from a prerequisite to a course. Enter the course name, then the prerequisite. Both must exist for the operation to succeed.
-
-- **5**  
-  Write to file: Works only in VSCode with an open folder, or from the terminal. Prompts for a filename and writes the `CourseGraph` to a text file. A version number is appended to avoid duplicate names.
+| **Option** | **Description** |
+|------------|-----------------|
+| **99**     | Ends or quits the program. Quit will also occur if the program is run 90,000 times (a safeguard against infinite loops caused by bugs). |
+| **0**      | Lists all courses with their prerequisites, all with ID numbers. Some courses and relationships are added beforehand but can be commented out to add courses and edges from scratch. |
+| **1**      | Add a course: Enter a course name to add it to the list. An ID will be generated for it. |
+| **2**      | Add an edge from a prerequisite to a course. Enter the course name, then the prerequisite. If both exist and there’s no parallel or self-edge, a new edge is added. |
+| **3**      | Remove a course: Enter the course name to remove the course and its associated edges from the graph. |
+| **4**      | Remove an edge from a prerequisite to a course. Enter the course name, then the prerequisite. Both must exist for the operation to succeed. |
+| **5**      | Write to file: Works only in VSCode with an open folder, or from the terminal. Prompts for a filename and writes the `CourseGraph` to a text file. A version number is appended to avoid duplicate names. |
 
 ---
 
@@ -54,28 +43,20 @@ An example graph based on the computer science curriculum at Smith College is pr
 1. Create a `CourseGraph` using `CourseGraphBuilder`, then write it to a text file.  
 2. Execute `CourseGraphAnalyzer.java`, and enter the name of a `.txt` `CourseGraph` file located in the working directory.  
    
-   **Possible Bugs**:  
-   While testing has not revealed errors, some `.txt` files may be invalid or empty. If the entered file name is invalid, the program will prompt for reentry up to 10 attempts before quitting.
+**Possible Bugs**:  
+While testing has not revealed errors, some `.txt` files may be invalid or empty. If the entered file name is invalid, the program will prompt for reentry up to 10 attempts before quitting.
 
-- **99**  
-  Ends the program. Includes a safeguard for infinite loops after 90,000 runs.  
+| **Option** | **Description** |
+|------------|-----------------|
+| **99**     | Ends the program. Includes a safeguard for infinite loops after 90,000 runs. |
+| **0**      | Lists all courses in the `CourseGraph` representing a major. |
+| **1**      | Search for a course: Enter a course name to see its prerequisites or a message if it’s not found. |
+| **2**      | Check if a course A is required for B. Enter course B, then A, to check if A is a prerequisite for B. If it is, the program shows the course progression (e.g., 110→120→210). |
+| **3**      | Check if A is a direct prerequisite for B. This answers whether A has a stored prerequisite relationship to B. |
+| **4**      | Generate a course path: |
+|            | - **0**: Generates a topological order of all courses in the `CourseGraph`, showing a valid sequence to satisfy all prerequisites. |
+|            | - **1**: Generates a topological order of courses needed to qualify for a specific course entered by the user. |
 
-- **0**  
-  Lists all courses in the `CourseGraph` representing a major.  
-
-- **1**  
-  Search for a course: Enter a course name to see its prerequisites or a message if it’s not found.  
-
-- **2**  
-  Check if a course A is required for B. Enter course B, then A, to check if A is a prerequisite for B. If it is, the program shows the course progression (e.g., 110→120→210).  
-
-- **3**  
-  Check if A is a direct prerequisite for B. This answers whether A has a stored prerequisite relationship to B.  
-
-- **4**  
-  Generate a course path:  
-  - **0**: Generates a topological order of all courses in the `CourseGraph`, showing a valid sequence to satisfy all prerequisites.  
-  - **1**: Generates a topological order of courses needed to qualify for a specific course entered by the user.  
 
 ---
 
