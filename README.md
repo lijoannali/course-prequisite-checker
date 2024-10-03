@@ -60,7 +60,7 @@ While testing has not revealed errors, some `.txt` files may be invalid or empty
 
 ---
 
-### Explanation of Examples and Testers  
+### Explanation of Unit Test Suite
 
 - **CourseGraphTester.java**  
   Tests methods like `IsEmpty`, `toString`, adding/removing courses and edges. A `CourseGraph` is initialized, built, and modified from scratch in this tester.  
